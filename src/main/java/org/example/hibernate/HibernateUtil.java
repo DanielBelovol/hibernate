@@ -1,7 +1,7 @@
 package org.example.hibernate;
 
 import lombok.Getter;
-import org.example.entities.Clients;
+import org.example.entities.Client;
 import org.example.entities.Planet;
 import org.example.entities.Ticket;
 import org.hibernate.SessionFactory;
@@ -19,7 +19,8 @@ public class HibernateUtil {
 
     private HibernateUtil() {
         sessionFactory = new Configuration()
-                .addAnnotatedClass(Clients.class)
+                .configure()
+                .addAnnotatedClass(Client.class)
                 .addAnnotatedClass(Planet.class)
                 .addAnnotatedClass(Ticket.class)
                 .buildSessionFactory();

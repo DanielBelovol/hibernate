@@ -20,7 +20,6 @@ INSERT INTO planets (id,name) VALUES
 
 
 INSERT INTO tickets (client_id, from_planet_id, to_planet_id) VALUES
-(1, 'VEN', 'MARS'),
 (2, 'JUP', 'EA'),
 (3, 'EA', 'SAT'),
 (4, 'VEN', 'SAT'),

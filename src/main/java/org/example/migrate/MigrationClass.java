@@ -3,12 +3,9 @@ package org.example.migrate;
 import org.flywaydb.core.Flyway;
 
 public class MigrationClass {
-    public static void main(String[] args) {
-        migrate();
-    }
-    public static void migrate(){
+    public void migrate(){
         Flyway flyway = Flyway.configure()
-                .dataSource("jdbc:h2:file:./src/main/resources/test", "sa", null)
+                .dataSource("jdbc:h2:~/test", "sa", "")
                 .locations("filesystem:src/main/resources/db.migration")
                 .baselineOnMigrate(true)
                 .cleanDisabled(false)
