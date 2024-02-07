@@ -12,13 +12,17 @@ public class Start {
         migrationClass.migrate();
 
         PlanetDAOImpl planetDAO = new PlanetDAOImpl();
+        planetDAO.deletePlanet("VEN");
         System.out.println(planetDAO.getAllPlanets().toString());
 
         ClientDAOImpl clientDAO = new ClientDAOImpl();
+        clientDAO.deleteClient(1L);
         System.out.println(clientDAO.getAllClients().toString());
 
         TicketDAOImpl ticketDAO = new TicketDAOImpl();
         System.out.println(ticketDAO.getAllTickets().toString());
+
+
 
     }
 }

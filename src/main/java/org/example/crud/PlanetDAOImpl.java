@@ -77,24 +77,18 @@ public class PlanetDAOImpl implements PlanetDAO {
     @Override
     public void deletePlanet(String id) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            Planet planet = getPlanet(id); // Повторное использование метода getPlanet
-            if (planet != null) {
-                session.createQuery("delete from Ticket where planet.id = :planetId")
-                        .setParameter("planetId", planet.getId()).executeUpdate();
-                session.delete(planet);
-            } else {
-                System.err.println("Planet not found with id: " + id);
-            }
-            transaction.commit();
-        } catch (NumberFormatException e) {
-            System.err.println("Invalid planet ID format: " + id);
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
+        Session session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+
+        Planet planet = session.get(Planet.class, id);
+        if (planet != null) {
+
+
+
+            session.delete(planet);
         }
+
+        transaction.commit();
+        session.close();
     }
 }
