@@ -1,13 +1,11 @@
 package org.example.crud;
 
 import org.example.dao.TicketDAO;
-import org.example.entities.Client;
 import org.example.entities.Ticket;
 import org.example.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -61,10 +59,8 @@ public class TicketDAOImpl implements TicketDAO {
                 ticket.setCreatedAt(newUpdatedTicket.getCreatedAt());
                 ticket.setFromPlanet(newUpdatedTicket.getFromPlanet());
                 ticket.setToPlanet(newUpdatedTicket.getToPlanet());
-                // Нет необходимости вызывать session.update(), поскольку изменения отслеживаются и применяются автоматически при commit.
             } else {
                 System.err.println("Ticket not found with id: " + newUpdatedTicket.getId());
-                // Опционально: можно выбросить исключение или добавить логику для обработки данной ситуации.
             }
             transaction.commit();
         } catch (Exception e) {
@@ -85,7 +81,6 @@ public class TicketDAOImpl implements TicketDAO {
                 session.delete(ticket);
             } else {
                 System.err.println("Ticket not found with id: " + id);
-                // Опционально: можно выбросить исключение или добавить логику для обработки данной ситуации.
             }
             transaction.commit();
         } catch (Exception e) {

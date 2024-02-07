@@ -1,14 +1,12 @@
 package org.example.crud;
 
 import org.example.dao.PlanetDAO;
-import org.example.entities.Client;
 import org.example.entities.Planet;
-import org.example.entities.Ticket;
 import org.example.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class PlanetDAOImpl implements PlanetDAO {
     @Override
     public Planet getPlanet(String id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.get(Planet.class, Long.parseLong(id)); // Преобразование String в Long
+            return session.get(Planet.class, id);
         } catch (NumberFormatException e) {
             System.err.println("Invalid planet ID format: " + id);
             return null;
@@ -59,7 +57,7 @@ public class PlanetDAOImpl implements PlanetDAO {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            Planet planet = session.get(Planet.class, Long.parseLong(id)); // Преобразование String в Long
+            Planet planet = session.get(Planet.class, id);
             if (planet != null) {
                 planet.setName(name);
             } else {

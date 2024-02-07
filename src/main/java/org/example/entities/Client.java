@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "clients")
-@NoArgsConstructor // Lombok аннотация для конструктора без аргументов
+@NoArgsConstructor
 public class Client {
 
     @Id
@@ -25,7 +25,6 @@ public class Client {
 
 
 
-    // Конструктор с параметром name
     public Client(String name) {
         this.name = name;
     }

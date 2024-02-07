@@ -6,7 +6,7 @@ import org.example.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class ClientDAOImpl implements ClientDAO {
             if (client != null) {
                 client.setName(name);
             } else {
-                // Лучше выбросить исключение или вернуть значение, указывающее на ошибку
+
                 System.err.println("Client not found with id: " + id);
             }
             transaction.commit();
@@ -81,7 +81,7 @@ public class ClientDAOImpl implements ClientDAO {
             if (client != null) {
                 session.delete(client);
             } else {
-                // Аналогично update, лучше уведомить о том, что клиент не найден
+
                 System.err.println("Client not found with id: " + clientId);
             }
             transaction.commit();
