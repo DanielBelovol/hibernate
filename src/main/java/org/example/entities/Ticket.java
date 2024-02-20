@@ -1,12 +1,11 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "tickets")
@@ -18,10 +17,11 @@ public class Ticket {
     private Long id;
 
     @Setter@Getter
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     @Setter@Getter
     private Client client;
 
@@ -34,6 +34,13 @@ public class Ticket {
     @JoinColumn(name = "to_planet_id")
     @Setter@Getter
     private Planet toPlanet;
+
+    public Ticket(Long id, Planet fromPlanet, Planet toPlanet) {
+        this.id = id;
+        this.client = client;
+        this.fromPlanet = fromPlanet;
+        this.toPlanet = toPlanet;
+    }
 
     @Override
     public String toString() {

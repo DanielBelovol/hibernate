@@ -3,26 +3,25 @@ package org.example;
 import org.example.crud.ClientDAOImpl;
 import org.example.crud.PlanetDAOImpl;
 import org.example.crud.TicketDAOImpl;
-import org.example.hibernate.HibernateUtil;
+import org.example.entities.Planet;
+import org.example.entities.Ticket;
+import org.example.exception.CustomException;
 import org.example.migrate.MigrationClass;
 
+import java.util.List;
+
+
 public class Start {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CustomException {
         MigrationClass migrationClass = new MigrationClass();
         migrationClass.migrate();
 
-        PlanetDAOImpl planetDAO = new PlanetDAOImpl();
-        planetDAO.deletePlanet("VEN");
-        System.out.println(planetDAO.getAllPlanets().toString());
+        TicketDAOImpl ticketDAO = new TicketDAOImpl();
+        ticketDAO.save(new Ticket(21L, new Planet("VEN","Venus"), new Planet("MARS","Mars")));
 
         ClientDAOImpl clientDAO = new ClientDAOImpl();
-        clientDAO.deleteClient(1L);
-        System.out.println(clientDAO.getAllClients().toString());
+        List<Ticket> allTickets = clientDAO.getAllTickets(2L);
 
-        TicketDAOImpl ticketDAO = new TicketDAOImpl();
-        System.out.println(ticketDAO.getAllTickets().toString());
-
-
-
+        System.out.println(allTickets);
     }
 }

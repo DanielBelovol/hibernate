@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchProfile;
+
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +26,8 @@ public class Client {
     @Getter @Setter
     private String name;
 
-
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "client")
+    private Set<Ticket> tickets;
 
     public Client(String name) {
         this.name = name;
@@ -32,7 +36,6 @@ public class Client {
         this.name = name;
         this.id = id;
     }
-
 
     @Override
     public String toString() {
